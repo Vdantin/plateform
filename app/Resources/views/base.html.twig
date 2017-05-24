@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Market place </title>
+
+    {% block stylesheets %}
+      <!-- Bootstrap core CSS -->
+      <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+      <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+      <!-- Custom fonts for this template -->
+      <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+      <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+      <!-- Custom styles for this template -->
+      <link href="{{asset('css/grayscale.min.css')}}" rel="stylesheet">
+    {% endblock %}
+
+    <!-- Temporary navbar container fix -->
+    <style>
+      .navbar-toggler {
+        z-index: 1;
+      }
+      @media (max-width: 576px) {
+        nav > .container {
+          width: 100%;
+        }
+      }
+
+    </style>
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar fixed-top navbar-toggleable-md navbar-light">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="container">
+        <a class="navbar-brand" href="#page-top">Market Place</a>
+        <div class="collapse navbar-collapse" id="navbarExample">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link " href="#about">About</a>
+            </li>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+<li class="dropdown nav-item ">
+<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" >  <span class=""><i class="fa fa-user "> </i> {{ app.user.username |title }} </span></a>
+<ul class="dropdown-menu " role="menu"> 
+{% if  is_granted('ROLE_ADMIN') %} 
+<li > <a href="{{path('site_admin_homepage')}}" class="text-success red"> <i class="fa fa-dashboard red"></i> Dashboard </a></li> 
+<li ><a href="https://hp188.hostpapa.com:2096"><i class="fa fa-envelope-o red "></i><span class="red">  Messagerie</span></a></li>
+{% endif %}    
+<li > <a href="{{path('fos_user_profile_show')}}" class="red"  > <i class="fa fa-child red"></i> Profil </a></li>
+<li > <a href="{{path('fos_user_profile_edit')}}" class="red"> <i class="fa fa-cogs red"></i> Configuration </a></li>
+<li> <a href="{{ path('fos_user_security_logout')}}" class="red"><i class="fa fa-sign-out red"> </i> Déconnexion</a></li>
+</ul>
+</li>     
+
+{% else %}
+{# <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i> Inscription</a></li>#}
+<a href="{{ path('fos_user_security_login') }}" class="btn navbar-btn btn-white">Connexion</a>
+{% endif %}
+            
+            
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p>Copyright &copy; Your Website 2017</p>
+      </div>
+    </footer>
+
+    {% block javascripts %}
+      <!-- Bootstrap core JavaScript -->
+      <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+      <script src="{{asset('vendor/tether/tether.min.js')}}"></script>
+      <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+      <!-- Plugin JavaScript -->
+      <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+      <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+      <!-- Custom scripts for this template -->
+      <script src="{{asset('js/grayscale.min.js')}}"></script>
+      <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    {% endblock %}
+
+  </body>
+
+</html>

@@ -1,0 +1,7 @@
+stock_category:
+    resource: "@StockBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+stock_homepage:
+    path:     /
+    defaults: { _controller: StockBundle:Default:index }

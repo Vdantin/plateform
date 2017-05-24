@@ -1,0 +1,12 @@
+.red {
+    color: black;
+}
+
+
+#mainNav a {
+    color: white !important;
+}
+
+#mainNav a.red {
+    color: black !important;
+}
