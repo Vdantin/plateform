@@ -46,8 +46,10 @@ class Product {
      * @var int
      *
      * @ORM\Column(name="category_id", type="integer", nullable=true)
+     * Many products have many categories.
+     * @ORM\ManyToMany(targetEntity="StockBundle\Entity\Category")
      */
-    private $categoryId;
+    private $categories;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="product")
@@ -132,25 +134,50 @@ class Product {
     }
 
     /**
-     * Set categoryId
+     * Set categories
      *
-     * @param integer $categoryId
+     * @param integer $categories
      *
      * @return Product
      */
-    public function setCategoryId($categoryId) {
-        $this->categoryId = $categoryId;
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get categories
      *
      * @return integer
      */
-    public function getCategoryId() {
-        return $this->categoryId;
+    public function getCategories()
+    {
+        return $this->categories;
     }
 
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Product
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
