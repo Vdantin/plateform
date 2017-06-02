@@ -28,14 +28,6 @@ class Category
      */
     private $name;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="parent_id", type="integer", nullable=true)
-     * @ORM\OneToOne(targetEntity="parentId", cascade={"persist"})
-     */
-    private $parentId;
-
 
     /**
      * Get id
@@ -71,28 +63,5 @@ class Category
         return $this->name;
     }
 
-    /**
-     * Set parentId
-     *
-     * @param integer $parentId
-     *
-     * @return Category
-     */
-    public function setParentId($parentId)
-    {
-        $this->parentId = $parentId;
-
-        return $this;
-    }
-
-    /**
-     * Get parentId
-     *
-     * @return int
-     */
-    public function getParentId()
-    {
-        return $this->parentId;
-    }
 }
 

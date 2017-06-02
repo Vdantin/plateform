@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
- *
+ * @ORM\Entity
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="StockBundle\Repository\ProductRepository")
  */
-class Product
-{
+class Product {
+
     /**
      * @var int
      *
@@ -43,19 +43,24 @@ class Product
     private $price;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="category_id", type="integer")
+     * Many products have many categories.
+     * @ORM\ManyToMany(targetEntity="StockBundle\Entity\Category")
      */
-    private $categoryId;
+    private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="product")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @return int 
+     */
+    private $user;
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -66,8 +71,7 @@ class Product
      *
      * @return Product
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -78,8 +82,7 @@ class Product
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -90,8 +93,7 @@ class Product
      *
      * @return Product
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -102,8 +104,7 @@ class Product
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -114,8 +115,7 @@ class Product
      *
      * @return Product
      */
-    public function setPrice($price)
-    {
+    public function setPrice($price) {
         $this->price = $price;
 
         return $this;
@@ -126,32 +126,31 @@ class Product
      *
      * @return float
      */
-    public function getPrice()
-    {
+    public function getPrice() {
         return $this->price;
     }
 
     /**
-     * Set categoryId
+     * Set user
      *
-     * @param integer $categoryId
+     * @param \UserBundle\Entity\User $user
      *
      * @return Product
      */
-    public function setCategoryId($categoryId)
+    public function setUser(\UserBundle\Entity\User $user = null)
     {
-        $this->categoryId = $categoryId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get user
      *
-     * @return integer
+     * @return \UserBundle\Entity\User
      */
-    public function getCategoryId()
+    public function getUser()
     {
-        return $this->categoryId;
+        return $this->user;
     }
 }

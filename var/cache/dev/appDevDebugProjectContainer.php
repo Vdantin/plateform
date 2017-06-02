@@ -71,6 +71,19 @@ class appDevDebugProjectContainer extends Container
             'doctrine_cache.providers.doctrine.orm.default_metadata_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultMetadataCacheService',
             'doctrine_cache.providers.doctrine.orm.default_query_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultQueryCacheService',
             'doctrine_cache.providers.doctrine.orm.default_result_cache' => 'getDoctrineCache_Providers_Doctrine_Orm_DefaultResultCacheService',
+            'easyadmin.autocomplete' => 'getEasyadmin_AutocompleteService',
+            'easyadmin.cache.manager' => 'getEasyadmin_Cache_ManagerService',
+            'easyadmin.config.manager' => 'getEasyadmin_Config_ManagerService',
+            'easyadmin.form.type' => 'getEasyadmin_Form_TypeService',
+            'easyadmin.form.type.autocomplete' => 'getEasyadmin_Form_Type_AutocompleteService',
+            'easyadmin.form.type.divider' => 'getEasyadmin_Form_Type_DividerService',
+            'easyadmin.form.type.extension' => 'getEasyadmin_Form_Type_ExtensionService',
+            'easyadmin.form.type.group' => 'getEasyadmin_Form_Type_GroupService',
+            'easyadmin.form.type.section' => 'getEasyadmin_Form_Type_SectionService',
+            'easyadmin.listener.controller' => 'getEasyadmin_Listener_ControllerService',
+            'easyadmin.listener.request_post_initialize' => 'getEasyadmin_Listener_RequestPostInitializeService',
+            'easyadmin.paginator' => 'getEasyadmin_PaginatorService',
+            'easyadmin.query_builder' => 'getEasyadmin_QueryBuilderService',
             'file_locator' => 'getFileLocatorService',
             'filesystem' => 'getFilesystemService',
             'form.factory' => 'getForm_FactoryService',
@@ -279,6 +292,18 @@ class appDevDebugProjectContainer extends Container
             'validator.expression' => 'getValidator_ExpressionService',
             'var_dumper.cli_dumper' => 'getVarDumper_CliDumperService',
             'var_dumper.cloner' => 'getVarDumper_ClonerService',
+            'vich_uploader.directory_namer_subdir' => 'getVichUploader_DirectoryNamerSubdirService',
+            'vich_uploader.download_handler' => 'getVichUploader_DownloadHandlerService',
+            'vich_uploader.form.type.file' => 'getVichUploader_Form_Type_FileService',
+            'vich_uploader.form.type.image' => 'getVichUploader_Form_Type_ImageService',
+            'vich_uploader.namer_hash' => 'getVichUploader_NamerHashService',
+            'vich_uploader.namer_origname' => 'getVichUploader_NamerOrignameService',
+            'vich_uploader.namer_property' => 'getVichUploader_NamerPropertyService',
+            'vich_uploader.namer_uniqid' => 'getVichUploader_NamerUniqidService',
+            'vich_uploader.property_mapping_factory' => 'getVichUploader_PropertyMappingFactoryService',
+            'vich_uploader.storage' => 'getVichUploader_StorageService',
+            'vich_uploader.templating.helper.uploader_helper' => 'getVichUploader_Templating_Helper_UploaderHelperService',
+            'vich_uploader.upload_handler' => 'getVichUploader_UploadHandlerService',
             'web_profiler.controller.exception' => 'getWebProfiler_Controller_ExceptionService',
             'web_profiler.controller.profiler' => 'getWebProfiler_Controller_ProfilerService',
             'web_profiler.controller.router' => 'getWebProfiler_Controller_RouterService',
@@ -311,6 +336,7 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport.eventdispatcher' => true,
             'templating.locator' => true,
             'translator.selector' => true,
+            'vich_uploader.property_mapping_factory' => true,
             'web_profiler.csp.handler' => true,
         );
         $this->aliases = array(
@@ -437,7 +463,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('qpcEMlf0cP', 0, 'EaZSGoZwxrr3xwdfnyGhPC', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('qpcEMlf0cP', 0, 'wL40h+MhaqeCaxmPGpTsJO', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -468,7 +494,7 @@ class appDevDebugProjectContainer extends Container
 
         $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, ($this->targetDirs[3].'/app/Resources'));
 
-        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => $this->get('kernel.class_cache.cache_warmer'), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator')), 3 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('cQxv9873Hc', 0, 'EaZSGoZwxrr3xwdfnyGhPC', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 4 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 6 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c, array()), 7 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 8 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
+        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, ${($_ = isset($this->services['templating.locator']) ? $this->services['templating.locator'] : $this->getTemplating_LocatorService()) && false ?: '_'}), 1 => $this->get('kernel.class_cache.cache_warmer'), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer($this->get('translator')), 3 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer($this->get('validator.builder'), (__DIR__.'/validation.php'), \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('cQxv9873Hc', 0, 'wL40h+MhaqeCaxmPGpTsJO', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE))), 4 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 5 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer(${($_ = isset($this->services['annotations.reader']) ? $this->services['annotations.reader'] : $this->getAnnotations_ReaderService()) && false ?: '_'}, (__DIR__.'/annotations.php'), ${($_ = isset($this->services['cache.annotations']) ? $this->services['cache.annotations'] : $this->getCache_AnnotationsService()) && false ?: '_'}), 6 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c, array()), 7 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheWarmer($this->get('twig'), new \Symfony\Bundle\TwigBundle\TemplateIterator($a, ($this->targetDirs[3].'/app'), array())), 8 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine')), 9 => new \JavierEguiluz\Bundle\EasyAdminBundle\Cache\ConfigWarmer($this->get('easyadmin.config.manager'))));
     }
 
     /**
@@ -614,6 +640,8 @@ class appDevDebugProjectContainer extends Container
         $this->services['debug.event_dispatcher'] = $instance = new \Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher(new \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher($this), $this->get('debug.stopwatch'), $this->get('monolog.logger.event', ContainerInterface::NULL_ON_INVALID_REFERENCE));
 
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
+        $instance->addListenerService('kernel.controller', array(0 => 'easyadmin.listener.controller', 1 => 'onKernelController'), 0);
+        $instance->addListenerService('easy_admin.post_initialize', array(0 => 'easyadmin.listener.request_post_initialize', 1 => 'initializeRequest'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
@@ -733,8 +761,21 @@ class appDevDebugProjectContainer extends Container
      *
      * @return \Doctrine\ORM\EntityManager A Doctrine\ORM\EntityManager instance
      */
-    protected function getDoctrine_Orm_DefaultEntityManagerService($lazyLoad = true)
+    public function getDoctrine_Orm_DefaultEntityManagerService($lazyLoad = true)
     {
+        if ($lazyLoad) {
+
+            return $this->services['doctrine.orm.default_entity_manager'] = new DoctrineORMEntityManager_000000006246eb65000000001d29f7136c9721cdf2583553a8b5382b7c177a7d(
+                function (&$wrappedInstance, \ProxyManager\Proxy\LazyLoadingInterface $proxy) {
+                    $wrappedInstance = $this->getDoctrine_Orm_DefaultEntityManagerService(false);
+
+                    $proxy->setProxyInitializer(null);
+
+                    return true;
+                }
+            );
+        }
+
         $a = $this->get('annotation_reader');
 
         $b = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($a, array(0 => ($this->targetDirs[3].'/src/UserBundle/Entity'), 1 => ($this->targetDirs[3].'/src/StockBundle/Entity')));
@@ -759,7 +800,7 @@ class appDevDebugProjectContainer extends Container
         $d->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
         $d->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
+        $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -883,6 +924,180 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'easyadmin.autocomplete' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Search\Autocomplete A JavierEguiluz\Bundle\EasyAdminBundle\Search\Autocomplete instance
+     */
+    protected function getEasyadmin_AutocompleteService()
+    {
+        return $this->services['easyadmin.autocomplete'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Search\Autocomplete($this->get('easyadmin.config.manager'), new \JavierEguiluz\Bundle\EasyAdminBundle\Search\Finder($this->get('easyadmin.query_builder'), $this->get('easyadmin.paginator')), $this->get('property_accessor'));
+    }
+
+    /**
+     * Gets the 'easyadmin.cache.manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Cache\CacheManager A JavierEguiluz\Bundle\EasyAdminBundle\Cache\CacheManager instance
+     */
+    protected function getEasyadmin_Cache_ManagerService()
+    {
+        return $this->services['easyadmin.cache.manager'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Cache\CacheManager((__DIR__.'/easy_admin'));
+    }
+
+    /**
+     * Gets the 'easyadmin.config.manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Configuration\ConfigManager A JavierEguiluz\Bundle\EasyAdminBundle\Configuration\ConfigManager instance
+     */
+    protected function getEasyadmin_Config_ManagerService()
+    {
+        return $this->services['easyadmin.config.manager'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Configuration\ConfigManager($this);
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType A JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType instance
+     */
+    protected function getEasyadmin_Form_TypeService()
+    {
+        $a = $this->get('form.type_guesser.validator');
+        $b = $this->get('form.type_guesser.doctrine');
+
+        $c = new \Symfony\Component\Form\FormTypeGuesserChain(array(0 => $a, 1 => $b));
+
+        return $this->services['easyadmin.form.type'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType($this->get('easyadmin.config.manager'), array(4 => new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\AutocompleteTypeConfigurator(), 3 => new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\CollectionTypeConfigurator(), 2 => new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\CheckboxTypeConfigurator(), 1 => new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\RequiredOptionConfigurator($c), 0 => new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\EntityTypeConfigurator($c)));
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type.autocomplete' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminAutocompleteType A JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminAutocompleteType instance
+     */
+    protected function getEasyadmin_Form_Type_AutocompleteService()
+    {
+        return $this->services['easyadmin.form.type.autocomplete'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminAutocompleteType($this->get('easyadmin.config.manager'));
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type.divider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType A JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType instance
+     */
+    protected function getEasyadmin_Form_Type_DividerService()
+    {
+        return $this->services['easyadmin.form.type.divider'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType();
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type.extension' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Extension\EasyAdminExtension A JavierEguiluz\Bundle\EasyAdminBundle\Form\Extension\EasyAdminExtension instance
+     */
+    protected function getEasyadmin_Form_Type_ExtensionService()
+    {
+        return $this->services['easyadmin.form.type.extension'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Extension\EasyAdminExtension($this->get('request_stack', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type.group' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType A JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType instance
+     */
+    protected function getEasyadmin_Form_Type_GroupService()
+    {
+        return $this->services['easyadmin.form.type.group'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType();
+    }
+
+    /**
+     * Gets the 'easyadmin.form.type.section' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType A JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType instance
+     */
+    protected function getEasyadmin_Form_Type_SectionService()
+    {
+        return $this->services['easyadmin.form.type.section'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType();
+    }
+
+    /**
+     * Gets the 'easyadmin.listener.controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\EventListener\ControllerListener A JavierEguiluz\Bundle\EasyAdminBundle\EventListener\ControllerListener instance
+     */
+    protected function getEasyadmin_Listener_ControllerService()
+    {
+        return $this->services['easyadmin.listener.controller'] = new \JavierEguiluz\Bundle\EasyAdminBundle\EventListener\ControllerListener($this->get('easyadmin.config.manager'), $this->get('debug.controller_resolver'));
+    }
+
+    /**
+     * Gets the 'easyadmin.listener.request_post_initialize' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\EventListener\RequestPostInitializeListener A JavierEguiluz\Bundle\EasyAdminBundle\EventListener\RequestPostInitializeListener instance
+     */
+    protected function getEasyadmin_Listener_RequestPostInitializeService()
+    {
+        return $this->services['easyadmin.listener.request_post_initialize'] = new \JavierEguiluz\Bundle\EasyAdminBundle\EventListener\RequestPostInitializeListener($this->get('doctrine'), $this->get('request_stack', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'easyadmin.paginator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Search\Paginator A JavierEguiluz\Bundle\EasyAdminBundle\Search\Paginator instance
+     */
+    protected function getEasyadmin_PaginatorService()
+    {
+        return $this->services['easyadmin.paginator'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Search\Paginator();
+    }
+
+    /**
+     * Gets the 'easyadmin.query_builder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \JavierEguiluz\Bundle\EasyAdminBundle\Search\QueryBuilder A JavierEguiluz\Bundle\EasyAdminBundle\Search\QueryBuilder instance
+     */
+    protected function getEasyadmin_QueryBuilderService()
+    {
+        return $this->services['easyadmin.query_builder'] = new \JavierEguiluz\Bundle\EasyAdminBundle\Search\QueryBuilder($this->get('doctrine'));
+    }
+
+    /**
      * Gets the 'file_locator' service.
      *
      * This service is shared.
@@ -931,7 +1146,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_RegistryService()
     {
-        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => 'form.type.form', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType' => 'form.type.choice', 'Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType' => 'form.type.entity', 'FOS\\UserBundle\\Form\\Type\\UsernameFormType' => 'fos_user.username_form_type', 'FOS\\UserBundle\\Form\\Type\\ProfileFormType' => 'fos_user.profile.form.type', 'FOS\\UserBundle\\Form\\Type\\RegistrationFormType' => 'fos_user.registration.form.type', 'FOS\\UserBundle\\Form\\Type\\ChangePasswordFormType' => 'fos_user.change_password.form.type', 'FOS\\UserBundle\\Form\\Type\\ResettingFormType' => 'fos_user.resetting.form.type'), array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.upload.validator', 3 => 'form.type_extension.csrf', 4 => 'form.type_extension.form.data_collector'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType' => array(0 => 'form.type_extension.repeated.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
+        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => 'form.type.form', 'Symfony\\Component\\Form\\Extension\\Core\\Type\\ChoiceType' => 'form.type.choice', 'Symfony\\Bridge\\Doctrine\\Form\\Type\\EntityType' => 'form.type.entity', 'FOS\\UserBundle\\Form\\Type\\UsernameFormType' => 'fos_user.username_form_type', 'FOS\\UserBundle\\Form\\Type\\ProfileFormType' => 'fos_user.profile.form.type', 'FOS\\UserBundle\\Form\\Type\\RegistrationFormType' => 'fos_user.registration.form.type', 'FOS\\UserBundle\\Form\\Type\\ChangePasswordFormType' => 'fos_user.change_password.form.type', 'FOS\\UserBundle\\Form\\Type\\ResettingFormType' => 'fos_user.resetting.form.type', 'Vich\\UploaderBundle\\Form\\Type\\VichFileType' => 'vich_uploader.form.type.file', 'Vich\\UploaderBundle\\Form\\Type\\VichImageType' => 'vich_uploader.form.type.image', 'JavierEguiluz\\Bundle\\EasyAdminBundle\\Form\\Type\\EasyAdminFormType' => 'easyadmin.form.type', 'JavierEguiluz\\Bundle\\EasyAdminBundle\\Form\\Type\\EasyAdminAutocompleteType' => 'easyadmin.form.type.autocomplete', 'JavierEguiluz\\Bundle\\EasyAdminBundle\\Form\\Type\\EasyAdminDividerType' => 'easyadmin.form.type.divider', 'JavierEguiluz\\Bundle\\EasyAdminBundle\\Form\\Type\\EasyAdminSectionType' => 'easyadmin.form.type.section', 'JavierEguiluz\\Bundle\\EasyAdminBundle\\Form\\Type\\EasyAdminGroupType' => 'easyadmin.form.type.group'), array('Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.upload.validator', 3 => 'form.type_extension.csrf', 4 => 'form.type_extension.form.data_collector', 5 => 'easyadmin.form.type.extension'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType' => array(0 => 'form.type_extension.repeated.validator'), 'Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
     }
 
     /**
@@ -2315,6 +2530,7 @@ class appDevDebugProjectContainer extends Container
         $instance->add($c);
         $instance->add(new \Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector($this));
         $instance->add($this->get('data_collector.dump'));
+        $instance->add(new \JavierEguiluz\Bundle\EasyAdminBundle\DataCollector\EasyAdminDataCollector($this->get('easyadmin.config.manager')));
         $instance->add($d);
 
         return $instance;
@@ -2594,7 +2810,7 @@ class appDevDebugProjectContainer extends Container
         $r = new \Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener($b, $h, $i, $n, 'main', $p, $q, array('check_path' => 'fos_user_security_check', 'use_forward' => false, 'require_previous_session' => true, 'username_parameter' => '_username', 'password_parameter' => '_password', 'csrf_parameter' => '_csrf_token', 'csrf_token_id' => 'authenticate', 'post_only' => true), $a, $c, $this->get('security.csrf.token_manager'));
         $r->setRememberMeServices($f);
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($m, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => ${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}), 'main', $a, $c, $d), 2 => $o, 3 => $r, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $f, $h, $a, $c, true, $i), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '592568dabb1047.71456977', $a, $h), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $m, $h)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $d, $n, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($g, $n, 'fos_user_security_login', false), NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', 'security.request_matcher.a64d671f18e5575531d76c1d1154fdc4476cb8a79c02ed7a3469178c6d7b96b5ed4e60db', true, false, 'security.user.provider.concrete.fos_userbundle', 'main', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'remember_me', 3 => 'anonymous')));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($m, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => ${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}), 'main', $a, $c, $d), 2 => $o, 3 => $r, 4 => new \Symfony\Component\Security\Http\Firewall\RememberMeListener($b, $f, $h, $a, $c, true, $i), 5 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '5931633b114ab5.70174502', $a, $h), 6 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, ${($_ = isset($this->services['debug.security.access.decision_manager']) ? $this->services['debug.security.access.decision_manager'] : $this->getDebug_Security_Access_DecisionManagerService()) && false ?: '_'}, $m, $h)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $d, $n, 'main', new \Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint($g, $n, 'fos_user_security_login', false), NULL, NULL, $a, false), new \Symfony\Bundle\SecurityBundle\Security\FirewallConfig('main', 'security.user_checker', 'security.request_matcher.a64d671f18e5575531d76c1d1154fdc4476cb8a79c02ed7a3469178c6d7b96b5ed4e60db', true, false, 'security.user.provider.concrete.fos_userbundle', 'main', 'security.authentication.form_entry_point.main', NULL, NULL, array(0 => 'logout', 1 => 'form_login', 2 => 'remember_me', 3 => 'anonymous')));
     }
 
     /**
@@ -3501,48 +3717,51 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTwigService()
     {
-        $a = $this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        $b = ${($_ = isset($this->services['debug.file_link_formatter']) ? $this->services['debug.file_link_formatter'] : $this->getDebug_FileLinkFormatterService()) && false ?: '_'};
-        $c = $this->get('request_stack');
+        $a = ${($_ = isset($this->services['security.logout_url_generator']) ? $this->services['security.logout_url_generator'] : $this->getSecurity_LogoutUrlGeneratorService()) && false ?: '_'};
+        $b = $this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        $c = ${($_ = isset($this->services['debug.file_link_formatter']) ? $this->services['debug.file_link_formatter'] : $this->getDebug_FileLinkFormatterService()) && false ?: '_'};
+        $d = $this->get('request_stack');
 
-        $d = new \Symfony\Component\VarDumper\Dumper\HtmlDumper(NULL, 'UTF-8', 0);
+        $e = new \Symfony\Component\VarDumper\Dumper\HtmlDumper(NULL, 'UTF-8', 0);
         if ($this->has('debug.file_link_formatter')) {
-            $d->setDisplayOptions(array('fileLinkFormat' => $b));
+            $e->setDisplayOptions(array('fileLinkFormat' => $c));
         }
 
-        $e = new \Symfony\Component\VarDumper\Dumper\HtmlDumper(NULL, 'UTF-8', 1);
-        $e->setDisplayOptions(array('maxStringLength' => 4096, 'fileLinkFormat' => $b));
+        $f = new \Symfony\Component\VarDumper\Dumper\HtmlDumper(NULL, 'UTF-8', 1);
+        $f->setDisplayOptions(array('maxStringLength' => 4096, 'fileLinkFormat' => $c));
 
-        $f = new \Symfony\Bridge\Twig\AppVariable();
-        $f->setEnvironment('dev');
-        $f->setDebug(true);
+        $g = new \Symfony\Bridge\Twig\AppVariable();
+        $g->setEnvironment('dev');
+        $g->setDebug(true);
         if ($this->has('security.token_storage')) {
-            $f->setTokenStorage($this->get('security.token_storage', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+            $g->setTokenStorage($this->get('security.token_storage', ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
         if ($this->has('request_stack')) {
-            $f->setRequestStack($c);
+            $g->setRequestStack($d);
         }
 
         $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'form_themes' => array(0 => 'form_div_layout.html.twig'), 'autoescape' => 'name', 'cache' => (__DIR__.'/twig'), 'charset' => 'UTF-8', 'paths' => array(), 'date' => array('format' => 'F j, Y H:i', 'interval_format' => '%d days', 'timezone' => NULL), 'number_format' => array('decimals' => 0, 'decimal_point' => '.', 'thousands_separator' => ',')));
 
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\LogoutUrlExtension(${($_ = isset($this->services['security.logout_url_generator']) ? $this->services['security.logout_url_generator'] : $this->getSecurity_LogoutUrlGeneratorService()) && false ?: '_'}));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\LogoutUrlExtension($a));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($this->get('security.authorization_checker', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\ProfilerExtension($this->get('twig.profile'), $a));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\ProfilerExtension($this->get('twig.profile'), $b));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\AssetExtension($this->get('assets.packages')));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension($b, ($this->targetDirs[3].'/app'), 'UTF-8'));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension($c, ($this->targetDirs[3].'/app'), 'UTF-8'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\RoutingExtension($this->get('router')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($a, true));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($b, true));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\ExpressionExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension());
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpFoundationExtension($c, ${($_ = isset($this->services['router.request_context']) ? $this->services['router.request_context'] : $this->getRouter_RequestContextService()) && false ?: '_'}));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpFoundationExtension($d, ${($_ = isset($this->services['router.request_context']) ? $this->services['router.request_context'] : $this->getRouter_RequestContextService()) && false ?: '_'}));
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(array(0 => $this, 1 => 'twig.form.renderer')));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner'), $d));
-        $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension($e));
-        $instance->addGlobal('app', $f);
+        $instance->addExtension(new \Vich\UploaderBundle\Twig\Extension\UploaderExtension($this->get('vich_uploader.templating.helper.uploader_helper')));
+        $instance->addExtension(new \JavierEguiluz\Bundle\EasyAdminBundle\Twig\EasyAdminTwigExtension($this->get('easyadmin.config.manager'), $this->get('property_accessor'), true, $a));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\DumpExtension($this->get('var_dumper.cloner'), $e));
+        $instance->addExtension(new \Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension($f));
+        $instance->addGlobal('app', $g);
         $instance->addRuntimeLoader(new \Symfony\Bundle\TwigBundle\ContainerAwareRuntimeLoader($this, array('Symfony\\Bridge\\Twig\\Extension\\HttpKernelRuntime' => 'twig.runtime.httpkernel', 'Symfony\\Bridge\\Twig\\Form\\TwigRenderer' => 'twig.form.renderer'), $this->get('logger', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         (new \Symfony\Bundle\TwigBundle\DependencyInjection\Configurator\EnvironmentConfigurator('F j, Y H:i', '%d days', NULL, 0, '.', ','))->configure($instance);
 
@@ -3624,6 +3843,8 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/friendsofsymfony/user-bundle/Resources/views'), 'FOSUser');
         $instance->addPath(($this->targetDirs[3].'/src/UserBundle/Resources/views'), 'User');
         $instance->addPath(($this->targetDirs[3].'/src/StockBundle/Resources/views'), 'Stock');
+        $instance->addPath(($this->targetDirs[3].'/vendor/vich/uploader-bundle/Resources/views'), 'VichUploader');
+        $instance->addPath(($this->targetDirs[3].'/vendor/javiereguiluz/easyadmin-bundle/Resources/views'), 'EasyAdmin');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
         $instance->addPath(($this->targetDirs[3].'/app/Resources/views'));
@@ -3792,6 +4013,151 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'vich_uploader.directory_namer_subdir' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Naming\SubdirDirectoryNamer A Vich\UploaderBundle\Naming\SubdirDirectoryNamer instance
+     */
+    protected function getVichUploader_DirectoryNamerSubdirService()
+    {
+        return $this->services['vich_uploader.directory_namer_subdir'] = new \Vich\UploaderBundle\Naming\SubdirDirectoryNamer();
+    }
+
+    /**
+     * Gets the 'vich_uploader.download_handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Handler\DownloadHandler A Vich\UploaderBundle\Handler\DownloadHandler instance
+     */
+    protected function getVichUploader_DownloadHandlerService()
+    {
+        return $this->services['vich_uploader.download_handler'] = new \Vich\UploaderBundle\Handler\DownloadHandler(${($_ = isset($this->services['vich_uploader.property_mapping_factory']) ? $this->services['vich_uploader.property_mapping_factory'] : $this->getVichUploader_PropertyMappingFactoryService()) && false ?: '_'}, $this->get('vich_uploader.storage'));
+    }
+
+    /**
+     * Gets the 'vich_uploader.form.type.file' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Form\Type\VichFileType A Vich\UploaderBundle\Form\Type\VichFileType instance
+     */
+    protected function getVichUploader_Form_Type_FileService()
+    {
+        return $this->services['vich_uploader.form.type.file'] = new \Vich\UploaderBundle\Form\Type\VichFileType($this->get('vich_uploader.storage'), $this->get('vich_uploader.upload_handler'), $this->get('translator'));
+    }
+
+    /**
+     * Gets the 'vich_uploader.form.type.image' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Form\Type\VichImageType A Vich\UploaderBundle\Form\Type\VichImageType instance
+     */
+    protected function getVichUploader_Form_Type_ImageService()
+    {
+        return $this->services['vich_uploader.form.type.image'] = new \Vich\UploaderBundle\Form\Type\VichImageType($this->get('vich_uploader.storage'), $this->get('vich_uploader.upload_handler'), $this->get('translator'));
+    }
+
+    /**
+     * Gets the 'vich_uploader.namer_hash' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Naming\HashNamer A Vich\UploaderBundle\Naming\HashNamer instance
+     */
+    protected function getVichUploader_NamerHashService()
+    {
+        return $this->services['vich_uploader.namer_hash'] = new \Vich\UploaderBundle\Naming\HashNamer();
+    }
+
+    /**
+     * Gets the 'vich_uploader.namer_origname' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Naming\OrignameNamer A Vich\UploaderBundle\Naming\OrignameNamer instance
+     */
+    protected function getVichUploader_NamerOrignameService()
+    {
+        return $this->services['vich_uploader.namer_origname'] = new \Vich\UploaderBundle\Naming\OrignameNamer();
+    }
+
+    /**
+     * Gets the 'vich_uploader.namer_property' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Naming\PropertyNamer A Vich\UploaderBundle\Naming\PropertyNamer instance
+     */
+    protected function getVichUploader_NamerPropertyService()
+    {
+        return $this->services['vich_uploader.namer_property'] = new \Vich\UploaderBundle\Naming\PropertyNamer();
+    }
+
+    /**
+     * Gets the 'vich_uploader.namer_uniqid' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Naming\UniqidNamer A Vich\UploaderBundle\Naming\UniqidNamer instance
+     */
+    protected function getVichUploader_NamerUniqidService()
+    {
+        return $this->services['vich_uploader.namer_uniqid'] = new \Vich\UploaderBundle\Naming\UniqidNamer();
+    }
+
+    /**
+     * Gets the 'vich_uploader.storage' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Storage\FileSystemStorage A Vich\UploaderBundle\Storage\FileSystemStorage instance
+     */
+    protected function getVichUploader_StorageService()
+    {
+        return $this->services['vich_uploader.storage'] = new \Vich\UploaderBundle\Storage\FileSystemStorage(${($_ = isset($this->services['vich_uploader.property_mapping_factory']) ? $this->services['vich_uploader.property_mapping_factory'] : $this->getVichUploader_PropertyMappingFactoryService()) && false ?: '_'});
+    }
+
+    /**
+     * Gets the 'vich_uploader.templating.helper.uploader_helper' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Templating\Helper\UploaderHelper A Vich\UploaderBundle\Templating\Helper\UploaderHelper instance
+     */
+    protected function getVichUploader_Templating_Helper_UploaderHelperService()
+    {
+        return $this->services['vich_uploader.templating.helper.uploader_helper'] = new \Vich\UploaderBundle\Templating\Helper\UploaderHelper($this->get('vich_uploader.storage'));
+    }
+
+    /**
+     * Gets the 'vich_uploader.upload_handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Vich\UploaderBundle\Handler\UploadHandler A Vich\UploaderBundle\Handler\UploadHandler instance
+     */
+    protected function getVichUploader_UploadHandlerService()
+    {
+        $a = $this->get('vich_uploader.storage');
+
+        return $this->services['vich_uploader.upload_handler'] = new \Vich\UploaderBundle\Handler\UploadHandler(${($_ = isset($this->services['vich_uploader.property_mapping_factory']) ? $this->services['vich_uploader.property_mapping_factory'] : $this->getVichUploader_PropertyMappingFactoryService()) && false ?: '_'}, $a, new \Vich\UploaderBundle\Injector\FileInjector($a), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
      * Gets the 'web_profiler.controller.exception' service.
      *
      * This service is shared.
@@ -3814,7 +4180,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getWebProfiler_Controller_ProfilerService()
     {
-        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.ajax' => array(0 => 'ajax', 1 => '@WebProfiler/Collector/ajax.html.twig'), 'data_collector.form' => array(0 => 'form', 1 => '@WebProfiler/Collector/form.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => '@Security/Collector/security.html.twig'), 'data_collector.twig' => array(0 => 'twig', 1 => '@WebProfiler/Collector/twig.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => '@Doctrine/Collector/db.html.twig'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.dump' => array(0 => 'dump', 1 => '@Debug/Profiler/dump.html.twig'), 'data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig')), 'bottom', ${($_ = isset($this->services['web_profiler.csp.handler']) ? $this->services['web_profiler.csp.handler'] : $this->getWebProfiler_Csp_HandlerService()) && false ?: '_'}, $this->targetDirs[3]);
+        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.ajax' => array(0 => 'ajax', 1 => '@WebProfiler/Collector/ajax.html.twig'), 'data_collector.form' => array(0 => 'form', 1 => '@WebProfiler/Collector/form.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => '@Security/Collector/security.html.twig'), 'data_collector.twig' => array(0 => 'twig', 1 => '@WebProfiler/Collector/twig.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => '@Doctrine/Collector/db.html.twig'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.dump' => array(0 => 'dump', 1 => '@Debug/Profiler/dump.html.twig'), 'easyadmin.data_collector' => array(0 => 'easyadmin', 1 => '@EasyAdmin/data_collector/easyadmin.html.twig'), 'data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig')), 'bottom', ${($_ = isset($this->services['web_profiler.csp.handler']) ? $this->services['web_profiler.csp.handler'] : $this->getWebProfiler_Csp_HandlerService()) && false ?: '_'}, $this->targetDirs[3]);
     }
 
     /**
@@ -3874,7 +4240,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_AnnotationsService()
     {
-        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('2t3BkV99AE', 0, 'EaZSGoZwxrr3xwdfnyGhPC', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.annotations'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('2t3BkV99AE', 0, 'wL40h+MhaqeCaxmPGpTsJO', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -4089,7 +4455,7 @@ class appDevDebugProjectContainer extends Container
     {
         $a = ${($_ = isset($this->services['security.user_checker']) ? $this->services['security.user_checker'] : $this->getSecurity_UserCheckerService()) && false ?: '_'};
 
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider(${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}, $a, 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'e04f0274cc113f91eb85ab56e2a27ae5bccd3aa0', 'main'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('592568dabb1047.71456977')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider(${($_ = isset($this->services['fos_user.user_provider.username']) ? $this->services['fos_user.user_provider.username'] : $this->getFosUser_UserProvider_UsernameService()) && false ?: '_'}, $a, 'main', $this->get('security.encoder_factory'), true), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider($a, 'e04f0274cc113f91eb85ab56e2a27ae5bccd3aa0', 'main'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('5931633b114ab5.70174502')), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -4288,6 +4654,28 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'vich_uploader.property_mapping_factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Vich\UploaderBundle\Mapping\PropertyMappingFactory A Vich\UploaderBundle\Mapping\PropertyMappingFactory instance
+     */
+    protected function getVichUploader_PropertyMappingFactoryService()
+    {
+        $a = new \Vich\UploaderBundle\Metadata\Driver\FileLocator(array());
+
+        $b = new \Metadata\MetadataFactory(new \Vich\UploaderBundle\Metadata\Driver\ChainDriver(array(0 => new \Vich\UploaderBundle\Metadata\Driver\AnnotationDriver($this->get('annotation_reader')), 1 => new \Vich\UploaderBundle\Metadata\Driver\YamlDriver($a), 2 => new \Vich\UploaderBundle\Metadata\Driver\XmlDriver($a))), 'Metadata\\ClassHierarchyMetadata', true);
+        $b->setCache(new \Metadata\Cache\FileCache((__DIR__.'/vich_uploader')));
+
+        return $this->services['vich_uploader.property_mapping_factory'] = new \Vich\UploaderBundle\Mapping\PropertyMappingFactory($this, new \Vich\UploaderBundle\Metadata\MetadataReader($b), array(), '_name');
+    }
+
+    /**
      * Gets the 'web_profiler.csp.handler' service.
      *
      * This service is shared.
@@ -4439,6 +4827,16 @@ class appDevDebugProjectContainer extends Container
                     'path' => ($this->targetDirs[3].'/src/StockBundle'),
                     'namespace' => 'StockBundle',
                 ),
+                'VichUploaderBundle' => array(
+                    'parent' => NULL,
+                    'path' => ($this->targetDirs[3].'/vendor/vich/uploader-bundle'),
+                    'namespace' => 'Vich\\UploaderBundle',
+                ),
+                'EasyAdminBundle' => array(
+                    'parent' => NULL,
+                    'path' => ($this->targetDirs[3].'/vendor/javiereguiluz/easyadmin-bundle'),
+                    'namespace' => 'JavierEguiluz\\Bundle\\EasyAdminBundle',
+                ),
                 'DebugBundle' => array(
                     'parent' => NULL,
                     'path' => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle'),
@@ -4494,6 +4892,8 @@ class appDevDebugProjectContainer extends Container
                 'FOSUserBundle' => 'FOS\\UserBundle\\FOSUserBundle',
                 'UserBundle' => 'UserBundle\\UserBundle',
                 'StockBundle' => 'StockBundle\\StockBundle',
+                'VichUploaderBundle' => 'Vich\\UploaderBundle\\VichUploaderBundle',
+                'EasyAdminBundle' => 'JavierEguiluz\\Bundle\\EasyAdminBundle\\EasyAdminBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -4801,6 +5201,72 @@ class appDevDebugProjectContainer extends Container
                 0 => 'ResetPassword',
                 1 => 'Default',
             ),
+            'vich_uploader.default_filename_attribute_suffix' => '_name',
+            'vich_uploader.mappings' => array(
+
+            ),
+            'vich_uploader.file_injector.class' => 'Vich\\UploaderBundle\\Injector\\FileInjector',
+            'easyadmin.config' => array(
+                'design' => array(
+                    'assets' => array(
+                        'css' => array(
+
+                        ),
+                        'js' => array(
+
+                        ),
+                        'favicon' => array(
+                            'path' => 'favicon.ico',
+                            'mime_type' => 'image/x-icon',
+                        ),
+                    ),
+                    'theme' => 'default',
+                    'color_scheme' => 'dark',
+                    'brand_color' => '#205081',
+                    'form_theme' => array(
+                        0 => '@EasyAdmin/form/bootstrap_3_horizontal_layout.html.twig',
+                    ),
+                    'menu' => array(
+
+                    ),
+                ),
+                'site_name' => 'EasyAdmin',
+                'formats' => array(
+                    'date' => 'Y-m-d',
+                    'time' => 'H:i:s',
+                    'datetime' => 'F j, Y H:i',
+                ),
+                'disabled_actions' => array(
+
+                ),
+                'translation_domain' => 'messages',
+                'list' => array(
+                    'actions' => array(
+
+                    ),
+                    'max_results' => 15,
+                ),
+                'edit' => array(
+                    'actions' => array(
+
+                    ),
+                ),
+                'new' => array(
+                    'actions' => array(
+
+                    ),
+                ),
+                'show' => array(
+                    'actions' => array(
+
+                    ),
+                    'max_results' => 10,
+                ),
+                'entities' => array(
+
+                ),
+            ),
+            'easyadmin.cache.dir' => (__DIR__.'/easy_admin'),
             'web_profiler.debug_toolbar.position' => 'bottom',
             'web_profiler.debug_toolbar.intercept_redirects' => false,
             'web_profiler.debug_toolbar.mode' => 2,
@@ -4861,6 +5327,10 @@ class appDevDebugProjectContainer extends Container
                     0 => 'dump',
                     1 => '@Debug/Profiler/dump.html.twig',
                 ),
+                'easyadmin.data_collector' => array(
+                    0 => 'easyadmin',
+                    1 => '@EasyAdmin/data_collector/easyadmin.html.twig',
+                ),
                 'data_collector.config' => array(
                     0 => 'config',
                     1 => '@WebProfiler/Collector/config.html.twig',
@@ -4871,4 +5341,614 @@ class appDevDebugProjectContainer extends Container
             ),
         );
     }
+}
+
+class DoctrineORMEntityManager_000000006246eb65000000001d29f7136c9721cdf2583553a8b5382b7c177a7d extends \Doctrine\ORM\EntityManager implements \ProxyManager\Proxy\VirtualProxyInterface
+{
+
+    /**
+     * @var \Closure|null initializer responsible for generating the wrapped object
+     */
+    private $valueHolder5931633b5fa96233138947 = null;
+
+    /**
+     * @var \Closure|null initializer responsible for generating the wrapped object
+     */
+    private $initializer5931633b5faa4612481694 = null;
+
+    /**
+     * @var bool[] map of public properties of the parent class
+     */
+    private static $publicProperties5931633b5fa71993118159 = array(
+        
+    );
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConnection()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getConnection', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getConnection();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMetadataFactory()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getMetadataFactory', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getMetadataFactory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getExpressionBuilder()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getExpressionBuilder', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getExpressionBuilder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function beginTransaction()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'beginTransaction', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->beginTransaction();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCache()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getCache', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getCache();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function transactional($func)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'transactional', array('func' => $func), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->transactional($func);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function commit()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'commit', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->commit();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function rollback()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'rollback', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->rollback();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getClassMetadata($className)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getClassMetadata', array('className' => $className), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getClassMetadata($className);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createQuery($dql = '')
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'createQuery', array('dql' => $dql), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->createQuery($dql);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createNamedQuery($name)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'createNamedQuery', array('name' => $name), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->createNamedQuery($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createNativeQuery($sql, \Doctrine\ORM\Query\ResultSetMapping $rsm)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'createNativeQuery', array('sql' => $sql, 'rsm' => $rsm), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->createNativeQuery($sql, $rsm);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createNamedNativeQuery($name)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'createNamedNativeQuery', array('name' => $name), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->createNamedNativeQuery($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createQueryBuilder()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'createQueryBuilder', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->createQueryBuilder();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function flush($entity = null)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'flush', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->flush($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function find($entityName, $id, $lockMode = null, $lockVersion = null)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'find', array('entityName' => $entityName, 'id' => $id, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->find($entityName, $id, $lockMode, $lockVersion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getReference($entityName, $id)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getReference', array('entityName' => $entityName, 'id' => $id), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getReference($entityName, $id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPartialReference($entityName, $identifier)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getPartialReference', array('entityName' => $entityName, 'identifier' => $identifier), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getPartialReference($entityName, $identifier);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function clear($entityName = null)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'clear', array('entityName' => $entityName), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->clear($entityName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function close()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'close', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->close();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function persist($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'persist', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->persist($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function remove($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'remove', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->remove($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function refresh($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'refresh', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->refresh($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detach($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'detach', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->detach($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function merge($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'merge', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->merge($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function copy($entity, $deep = false)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'copy', array('entity' => $entity, 'deep' => $deep), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->copy($entity, $deep);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function lock($entity, $lockMode, $lockVersion = null)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'lock', array('entity' => $entity, 'lockMode' => $lockMode, 'lockVersion' => $lockVersion), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->lock($entity, $lockMode, $lockVersion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRepository($entityName)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getRepository', array('entityName' => $entityName), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getRepository($entityName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function contains($entity)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'contains', array('entity' => $entity), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->contains($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEventManager()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getEventManager', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getEventManager();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getConfiguration()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getConfiguration', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getConfiguration();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isOpen()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'isOpen', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->isOpen();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUnitOfWork()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getUnitOfWork', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getUnitOfWork();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHydrator($hydrationMode)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getHydrator', array('hydrationMode' => $hydrationMode), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getHydrator($hydrationMode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function newHydrator($hydrationMode)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'newHydrator', array('hydrationMode' => $hydrationMode), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->newHydrator($hydrationMode);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProxyFactory()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getProxyFactory', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getProxyFactory();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function initializeObject($obj)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'initializeObject', array('obj' => $obj), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->initializeObject($obj);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFilters()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'getFilters', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->getFilters();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isFiltersStateClean()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'isFiltersStateClean', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->isFiltersStateClean();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasFilters()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'hasFilters', array(), $this->initializer5931633b5faa4612481694);
+
+        return $this->valueHolder5931633b5fa96233138947->hasFilters();
+    }
+
+    /**
+     * @override constructor for lazy initialization
+     *
+     * @param \Closure|null $initializer
+     */
+    public function __construct($initializer)
+    {
+        $this->initializer5931633b5faa4612481694 = $initializer;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function & __get($name)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__get', array('name' => $name), $this->initializer5931633b5faa4612481694);
+
+        if (isset(self::$publicProperties5931633b5fa71993118159[$name])) {
+            return $this->valueHolder5931633b5fa96233138947->$name;
+        }
+
+        $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
+
+        if (! $realInstanceReflection->hasProperty($name)) {
+            $targetObject = $this->valueHolder5931633b5fa96233138947;
+
+            $backtrace = debug_backtrace(false);
+            trigger_error('Undefined property: ' . get_parent_class($this) . '::$' . $name . ' in ' . $backtrace[0]['file'] . ' on line ' . $backtrace[0]['line'], \E_USER_NOTICE);
+            return $targetObject->$name;;
+            return;
+        }
+
+        $targetObject = $this->valueHolder5931633b5fa96233138947;
+        $accessor = function & () use ($targetObject, $name) {
+            return $targetObject->$name;
+        };
+            $backtrace = debug_backtrace(true);
+            $scopeObject = isset($backtrace[1]['object']) ? $backtrace[1]['object'] : new \stdClass();
+            $accessor = $accessor->bindTo($scopeObject, get_class($scopeObject));
+        $returnValue = & $accessor();
+
+        return $returnValue;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function __set($name, $value)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__set', array('name' => $name, 'value' => $value), $this->initializer5931633b5faa4612481694);
+
+        $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
+
+        if (! $realInstanceReflection->hasProperty($name)) {
+            $targetObject = $this->valueHolder5931633b5fa96233138947;
+
+            return $targetObject->$name = $value;;
+            return;
+        }
+
+        $targetObject = $this->valueHolder5931633b5fa96233138947;
+        $accessor = function & () use ($targetObject, $name, $value) {
+            return $targetObject->$name = $value;
+        };
+            $backtrace = debug_backtrace(true);
+            $scopeObject = isset($backtrace[1]['object']) ? $backtrace[1]['object'] : new \stdClass();
+            $accessor = $accessor->bindTo($scopeObject, get_class($scopeObject));
+        $returnValue = & $accessor();
+
+        return $returnValue;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function __isset($name)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__isset', array('name' => $name), $this->initializer5931633b5faa4612481694);
+
+        $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
+
+        if (! $realInstanceReflection->hasProperty($name)) {
+            $targetObject = $this->valueHolder5931633b5fa96233138947;
+
+            return isset($targetObject->$name);;
+            return;
+        }
+
+        $targetObject = $this->valueHolder5931633b5fa96233138947;
+        $accessor = function () use ($targetObject, $name) {
+            return isset($targetObject->$name);
+        };
+            $backtrace = debug_backtrace(true);
+            $scopeObject = isset($backtrace[1]['object']) ? $backtrace[1]['object'] : new \stdClass();
+            $accessor = $accessor->bindTo($scopeObject, get_class($scopeObject));
+        $returnValue = $accessor();
+
+        return $returnValue;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function __unset($name)
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__unset', array('name' => $name), $this->initializer5931633b5faa4612481694);
+
+        $realInstanceReflection = new \ReflectionClass(get_parent_class($this));
+
+        if (! $realInstanceReflection->hasProperty($name)) {
+            $targetObject = $this->valueHolder5931633b5fa96233138947;
+
+            unset($targetObject->$name);;
+            return;
+        }
+
+        $targetObject = $this->valueHolder5931633b5fa96233138947;
+        $accessor = function () use ($targetObject, $name) {
+            unset($targetObject->$name);
+        };
+            $backtrace = debug_backtrace(true);
+            $scopeObject = isset($backtrace[1]['object']) ? $backtrace[1]['object'] : new \stdClass();
+            $accessor = $accessor->bindTo($scopeObject, get_class($scopeObject));
+        $returnValue = $accessor();
+
+        return $returnValue;
+    }
+
+    public function __clone()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__clone', array(), $this->initializer5931633b5faa4612481694);
+
+        $this->valueHolder5931633b5fa96233138947 = clone $this->valueHolder5931633b5fa96233138947;
+    }
+
+    public function __sleep()
+    {
+        $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, '__sleep', array(), $this->initializer5931633b5faa4612481694);
+
+        return array('valueHolder5931633b5fa96233138947');
+    }
+
+    public function __wakeup()
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProxyInitializer(\Closure $initializer = null)
+    {
+        $this->initializer5931633b5faa4612481694 = $initializer;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProxyInitializer()
+    {
+        return $this->initializer5931633b5faa4612481694;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function initializeProxy()
+    {
+        return $this->initializer5931633b5faa4612481694 && $this->initializer5931633b5faa4612481694->__invoke($this->valueHolder5931633b5fa96233138947, $this, 'initializeProxy', array(), $this->initializer5931633b5faa4612481694);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isProxyInitialized()
+    {
+        return null !== $this->valueHolder5931633b5fa96233138947;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWrappedValueHolderValue()
+    {
+        return $this->valueHolder5931633b5fa96233138947;
+    }
+
+
 }

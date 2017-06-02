@@ -1,20 +1,60 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Product creation</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Create" />
 
 
-    {{ form_end(form) }}
+    <div class ="container">
+        <div class="row">
+            <div class="col-md-4 col-md-push-4">
+
+                <h3 class="text-uppercase" >Profile :</h3> 
+
+                <h1>Product creation</h1>
+
+                {{ form_start(form) }}
+                <div class="form-group ">
+                    <label class=" control-label" >{{ form_label(form.title, "Title") }}</label>  
+                    {{ form_widget(form.title, { 'attr': {'class': 'form-control input-md ','placeholder':' '} }) }}
+                    <span class="help-block"> {{ form_errors(form.title) }}</span> 
+                </div>    
+
+                <div class="form-group ">
+                    <label class=" control-label" >{{ form_label(form.description, "Description") }}</label>  
+                    {{ form_widget(form.description, { 'attr': {'class': 'form-control input-md ','placeholder':' '} }) }}
+                    <span class="help-block"> {{ form_errors(form.description) }}</span> 
+                </div>  
+
+                <div class="form-group ">
+                    <label class=" control-label" >{{ form_label(form.price, "Price") }}</label>  
+                    {{ form_widget(form.price, { 'attr': {'class': 'form-control input-md ','placeholder':' '} }) }}
+                    <span class="help-block"> {{ form_errors(form.price) }}</span> 
+                </div> 
+
+                <div class="categories">
+                    <label class=" control-label" >{{ form_label(form.categories, "Category") }}</label>  
+                    {{ form_widget(form.categories, { 'attr': {'class': 'add-an-other-form','placeholder':' '} }) }}
+                    <span class="help-block"> {{ form_errors(form.categories) }}</span> 
+                </div> 
+
+                <input type="submit" value="Create" />
 
 
 
-    <ul>
-        <li>
-            <a href="{{ path('product_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
+                {{ form_end(form) }}
+
+
+
+                <ul>
+                    <li>
+                        <a href="{{ path('product_index') }}">Back to the list</a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+

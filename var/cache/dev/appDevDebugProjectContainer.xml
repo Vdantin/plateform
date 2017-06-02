@@ -20,6 +20,8 @@
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="UserBundle">UserBundle\UserBundle</parameter>
       <parameter key="StockBundle">StockBundle\StockBundle</parameter>
+      <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
+      <parameter key="EasyAdminBundle">JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -85,6 +87,16 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">/home/vincent/plateform/src/StockBundle</parameter>
         <parameter key="namespace">StockBundle</parameter>
+      </parameter>
+      <parameter key="VichUploaderBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/home/vincent/plateform/vendor/vich/uploader-bundle</parameter>
+        <parameter key="namespace">Vich\UploaderBundle</parameter>
+      </parameter>
+      <parameter key="EasyAdminBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/home/vincent/plateform/vendor/javiereguiluz/easyadmin-bundle</parameter>
+        <parameter key="namespace">JavierEguiluz\Bundle\EasyAdminBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -403,6 +415,52 @@
       <parameter>ResetPassword</parameter>
       <parameter>Default</parameter>
     </parameter>
+    <parameter key="vich_uploader.default_filename_attribute_suffix">_name</parameter>
+    <parameter key="vich_uploader.mappings" type="collection"/>
+    <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
+    <parameter key="easyadmin.config" type="collection">
+      <parameter key="design" type="collection">
+        <parameter key="assets" type="collection">
+          <parameter key="css" type="collection"/>
+          <parameter key="js" type="collection"/>
+          <parameter key="favicon" type="collection">
+            <parameter key="path">favicon.ico</parameter>
+            <parameter key="mime_type">image/x-icon</parameter>
+          </parameter>
+        </parameter>
+        <parameter key="theme">default</parameter>
+        <parameter key="color_scheme">dark</parameter>
+        <parameter key="brand_color">#205081</parameter>
+        <parameter key="form_theme" type="collection">
+          <parameter>@EasyAdmin/form/bootstrap_3_horizontal_layout.html.twig</parameter>
+        </parameter>
+        <parameter key="menu" type="collection"/>
+      </parameter>
+      <parameter key="site_name">EasyAdmin</parameter>
+      <parameter key="formats" type="collection">
+        <parameter key="date">Y-m-d</parameter>
+        <parameter key="time">H:i:s</parameter>
+        <parameter key="datetime">F j, Y H:i</parameter>
+      </parameter>
+      <parameter key="disabled_actions" type="collection"/>
+      <parameter key="translation_domain">messages</parameter>
+      <parameter key="list" type="collection">
+        <parameter key="actions" type="collection"/>
+        <parameter key="max_results">15</parameter>
+      </parameter>
+      <parameter key="edit" type="collection">
+        <parameter key="actions" type="collection"/>
+      </parameter>
+      <parameter key="new" type="collection">
+        <parameter key="actions" type="collection"/>
+      </parameter>
+      <parameter key="show" type="collection">
+        <parameter key="actions" type="collection"/>
+        <parameter key="max_results">10</parameter>
+      </parameter>
+      <parameter key="entities" type="collection"/>
+    </parameter>
+    <parameter key="easyadmin.cache.dir">/home/vincent/plateform/var/cache/dev/easy_admin</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -462,6 +520,10 @@
       <parameter key="data_collector.dump" type="collection">
         <parameter>dump</parameter>
         <parameter>@Debug/Profiler/dump.html.twig</parameter>
+      </parameter>
+      <parameter key="easyadmin.data_collector" type="collection">
+        <parameter>easyadmin</parameter>
+        <parameter>@EasyAdmin/data_collector/easyadmin.html.twig</parameter>
       </parameter>
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -533,7 +595,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>cQxv9873Hc</argument>
                 <argument>0</argument>
-                <argument>EaZSGoZwxrr3xwdfnyGhPC</argument>
+                <argument>wL40h+MhaqeCaxmPGpTsJO</argument>
                 <argument>/home/vincent/plateform/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -586,6 +648,12 @@
           <service class="Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer" public="false">
             <tag name="kernel.cache_warmer"/>
             <argument type="service" id="doctrine"/>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Cache\ConfigWarmer" public="false">
+            <tag name="kernel.cache_warmer" priority="-2048"/>
+            <argument type="service" id="easyadmin.config.manager"/>
           </service>
         </argument>
       </argument>
@@ -716,7 +784,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>qpcEMlf0cP</argument>
       <argument>0</argument>
-      <argument>EaZSGoZwxrr3xwdfnyGhPC</argument>
+      <argument>wL40h+MhaqeCaxmPGpTsJO</argument>
       <argument>/home/vincent/plateform/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -726,7 +794,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>2t3BkV99AE</argument>
       <argument>0</argument>
-      <argument>EaZSGoZwxrr3xwdfnyGhPC</argument>
+      <argument>wL40h+MhaqeCaxmPGpTsJO</argument>
       <argument>/home/vincent/plateform/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1021,6 +1089,13 @@
               <argument key="FOS\UserBundle\Form\Type\RegistrationFormType">fos_user.registration.form.type</argument>
               <argument key="FOS\UserBundle\Form\Type\ChangePasswordFormType">fos_user.change_password.form.type</argument>
               <argument key="FOS\UserBundle\Form\Type\ResettingFormType">fos_user.resetting.form.type</argument>
+              <argument key="Vich\UploaderBundle\Form\Type\VichFileType">vich_uploader.form.type.file</argument>
+              <argument key="Vich\UploaderBundle\Form\Type\VichImageType">vich_uploader.form.type.image</argument>
+              <argument key="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType">easyadmin.form.type</argument>
+              <argument key="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminAutocompleteType">easyadmin.form.type.autocomplete</argument>
+              <argument key="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType">easyadmin.form.type.divider</argument>
+              <argument key="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType">easyadmin.form.type.section</argument>
+              <argument key="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType">easyadmin.form.type.group</argument>
             </argument>
             <argument type="collection">
               <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="collection">
@@ -1029,6 +1104,7 @@
                 <argument>form.type_extension.upload.validator</argument>
                 <argument>form.type_extension.csrf</argument>
                 <argument>form.type_extension.form.data_collector</argument>
+                <argument>easyadmin.form.type.extension</argument>
               </argument>
               <argument key="Symfony\Component\Form\Extension\Core\Type\RepeatedType" type="collection">
                 <argument>form.type_extension.repeated.validator</argument>
@@ -1403,6 +1479,14 @@
       </call>
       <call method="add">
         <argument type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\DataCollector\EasyAdminDataCollector" public="false">
+            <tag name="data_collector" template="@EasyAdmin/data_collector/easyadmin.html.twig" id="easyadmin"/>
+            <argument type="service" id="easyadmin.config.manager"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
           <service class="Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector" public="false">
             <tag name="data_collector" template="@WebProfiler/Collector/config.html.twig" id="config" priority="-255"/>
             <call method="setKernel">
@@ -1470,6 +1554,22 @@
         <argument type="collection">
           <argument>data_collector.router</argument>
           <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument>easyadmin.listener.controller</argument>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>easy_admin.post_initialize</argument>
+        <argument type="collection">
+          <argument>easyadmin.listener.request_post_initialize</argument>
+          <argument>initializeRequest</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -1766,7 +1866,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>592568dabb1047.71456977</argument>
+            <argument>5931633b114ab5.70174502</argument>
           </service>
         </argument>
       </argument>
@@ -2105,7 +2205,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>592568dabb1047.71456977</argument>
+            <argument>5931633b114ab5.70174502</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2365,6 +2465,25 @@
         <argument type="service">
           <service class="Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension" public="false">
             <tag name="twig.extension"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
+          <service class="Vich\UploaderBundle\Twig\Extension\UploaderExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service" id="vich_uploader.templating.helper.uploader_helper"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Twig\EasyAdminTwigExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service" id="easyadmin.config.manager"/>
+            <argument type="service" id="property_accessor"/>
+            <argument>true</argument>
+            <argument type="service" id="security.logout_url_generator" on-invalid="null"/>
           </service>
         </argument>
       </call>
@@ -2893,6 +3012,186 @@
       <argument type="service" id="router"/>
       <argument>86400</argument>
     </service>
+    <service id="vich_uploader.templating.helper.uploader_helper" class="Vich\UploaderBundle\Templating\Helper\UploaderHelper">
+      <tag name="templating.helper" alias="vich_uploader"/>
+      <argument type="service" id="vich_uploader.storage"/>
+    </service>
+    <service id="vich_uploader.property_mapping_factory" class="Vich\UploaderBundle\Mapping\PropertyMappingFactory" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service">
+        <service class="Vich\UploaderBundle\Metadata\MetadataReader" public="false">
+          <argument type="service">
+            <service class="Metadata\MetadataFactory" public="false">
+              <argument type="service">
+                <service class="Vich\UploaderBundle\Metadata\Driver\ChainDriver" public="false">
+                  <argument type="collection">
+                    <argument type="service">
+                      <service class="Vich\UploaderBundle\Metadata\Driver\AnnotationDriver" public="false">
+                        <argument type="service" id="annotation_reader"/>
+                      </service>
+                    </argument>
+                    <argument type="service">
+                      <service class="Vich\UploaderBundle\Metadata\Driver\YamlDriver" public="false">
+                        <argument type="service">
+                          <service class="Vich\UploaderBundle\Metadata\Driver\FileLocator" public="false">
+                            <argument type="collection"/>
+                          </service>
+                        </argument>
+                      </service>
+                    </argument>
+                    <argument type="service">
+                      <service class="Vich\UploaderBundle\Metadata\Driver\XmlDriver" public="false">
+                        <argument type="service">
+                          <service class="Vich\UploaderBundle\Metadata\Driver\FileLocator" public="false">
+                            <argument type="collection"/>
+                          </service>
+                        </argument>
+                      </service>
+                    </argument>
+                  </argument>
+                </service>
+              </argument>
+              <argument>Metadata\ClassHierarchyMetadata</argument>
+              <argument>true</argument>
+              <call method="setCache">
+                <argument type="service">
+                  <service class="Metadata\Cache\FileCache" public="false">
+                    <argument>/home/vincent/plateform/var/cache/dev/vich_uploader</argument>
+                  </service>
+                </argument>
+              </call>
+            </service>
+          </argument>
+        </service>
+      </argument>
+      <argument type="collection"/>
+      <argument>_name</argument>
+    </service>
+    <service id="vich_uploader.namer_uniqid" class="Vich\UploaderBundle\Naming\UniqidNamer"/>
+    <service id="vich_uploader.namer_property" class="Vich\UploaderBundle\Naming\PropertyNamer"/>
+    <service id="vich_uploader.namer_origname" class="Vich\UploaderBundle\Naming\OrignameNamer"/>
+    <service id="vich_uploader.namer_hash" class="Vich\UploaderBundle\Naming\HashNamer"/>
+    <service id="vich_uploader.directory_namer_subdir" class="Vich\UploaderBundle\Naming\SubdirDirectoryNamer"/>
+    <service id="vich_uploader.form.type.file" class="Vich\UploaderBundle\Form\Type\VichFileType">
+      <tag name="form.type" alias="vich_file"/>
+      <argument type="service" id="vich_uploader.storage"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="translator"/>
+    </service>
+    <service id="vich_uploader.form.type.image" class="Vich\UploaderBundle\Form\Type\VichImageType">
+      <tag name="form.type" alias="vich_image"/>
+      <argument type="service" id="vich_uploader.storage"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="translator"/>
+    </service>
+    <service id="vich_uploader.download_handler" class="Vich\UploaderBundle\Handler\DownloadHandler">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage"/>
+    </service>
+    <service id="vich_uploader.upload_handler" class="Vich\UploaderBundle\Handler\UploadHandler">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage"/>
+      <argument type="service">
+        <service class="Vich\UploaderBundle\Injector\FileInjector" public="false">
+          <argument type="service" id="vich_uploader.storage"/>
+        </service>
+      </argument>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="easyadmin.cache.manager" class="JavierEguiluz\Bundle\EasyAdminBundle\Cache\CacheManager">
+      <argument>/home/vincent/plateform/var/cache/dev/easy_admin</argument>
+    </service>
+    <service id="easyadmin.config.manager" class="JavierEguiluz\Bundle\EasyAdminBundle\Configuration\ConfigManager">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="easyadmin.query_builder" class="JavierEguiluz\Bundle\EasyAdminBundle\Search\QueryBuilder">
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="easyadmin.autocomplete" class="JavierEguiluz\Bundle\EasyAdminBundle\Search\Autocomplete">
+      <argument type="service" id="easyadmin.config.manager"/>
+      <argument type="service">
+        <service class="JavierEguiluz\Bundle\EasyAdminBundle\Search\Finder" public="false">
+          <argument type="service" id="easyadmin.query_builder"/>
+          <argument type="service" id="easyadmin.paginator"/>
+        </service>
+      </argument>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="easyadmin.paginator" class="JavierEguiluz\Bundle\EasyAdminBundle\Search\Paginator"/>
+    <service id="easyadmin.listener.controller" class="JavierEguiluz\Bundle\EasyAdminBundle\EventListener\ControllerListener">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+      <argument type="service" id="easyadmin.config.manager"/>
+      <argument type="service" id="debug.controller_resolver"/>
+    </service>
+    <service id="easyadmin.listener.request_post_initialize" class="JavierEguiluz\Bundle\EasyAdminBundle\EventListener\RequestPostInitializeListener">
+      <tag name="kernel.event_listener" event="easy_admin.post_initialize" method="initializeRequest"/>
+      <argument type="service" id="doctrine"/>
+      <argument type="service" id="request_stack" on-invalid="null"/>
+    </service>
+    <service id="easyadmin.form.type" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType">
+      <tag name="form.type"/>
+      <argument type="service" id="easyadmin.config.manager"/>
+      <argument type="collection">
+        <argument key="4" type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\AutocompleteTypeConfigurator" public="false">
+            <tag name="easyadmin.form.type.configurator" priority="30"/>
+          </service>
+        </argument>
+        <argument key="3" type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\CollectionTypeConfigurator" public="false">
+            <tag name="easyadmin.form.type.configurator" priority="20"/>
+          </service>
+        </argument>
+        <argument key="2" type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\CheckboxTypeConfigurator" public="false">
+            <tag name="easyadmin.form.type.configurator" priority="10"/>
+          </service>
+        </argument>
+        <argument key="1" type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\RequiredOptionConfigurator" public="false">
+            <tag name="easyadmin.form.type.configurator" priority="-10"/>
+            <argument type="service">
+              <service class="Symfony\Component\Form\FormTypeGuesserChain" public="false">
+                <argument type="collection">
+                  <argument type="service" id="form.type_guesser.validator"/>
+                  <argument type="service" id="form.type_guesser.doctrine"/>
+                </argument>
+              </service>
+            </argument>
+          </service>
+        </argument>
+        <argument key="0" type="service">
+          <service class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\Configurator\EntityTypeConfigurator" public="false">
+            <tag name="easyadmin.form.type.configurator" priority="-20"/>
+            <argument type="service">
+              <service class="Symfony\Component\Form\FormTypeGuesserChain" public="false">
+                <argument type="collection">
+                  <argument type="service" id="form.type_guesser.validator"/>
+                  <argument type="service" id="form.type_guesser.doctrine"/>
+                </argument>
+              </service>
+            </argument>
+          </service>
+        </argument>
+      </argument>
+    </service>
+    <service id="easyadmin.form.type.autocomplete" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminAutocompleteType">
+      <tag name="form.type" alias="easyadmin_autocomplete"/>
+      <argument type="service" id="easyadmin.config.manager"/>
+    </service>
+    <service id="easyadmin.form.type.divider" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType">
+      <tag name="form.type" alias="easyadmin_divider"/>
+    </service>
+    <service id="easyadmin.form.type.section" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType">
+      <tag name="form.type" alias="easyadmin_section"/>
+    </service>
+    <service id="easyadmin.form.type.group" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType">
+      <tag name="form.type" alias="easyadmin_group"/>
+    </service>
+    <service id="easyadmin.form.type.extension" class="JavierEguiluz\Bundle\EasyAdminBundle\Form\Extension\EasyAdminExtension">
+      <tag name="form.type_extension" alias="form" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
+      <argument type="service" id="request_stack" on-invalid="null"/>
+    </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig" priority="240"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
@@ -2979,6 +3278,10 @@
         <argument key="data_collector.dump" type="collection">
           <argument>dump</argument>
           <argument>@Debug/Profiler/dump.html.twig</argument>
+        </argument>
+        <argument key="easyadmin.data_collector" type="collection">
+          <argument>easyadmin</argument>
+          <argument>@EasyAdmin/data_collector/easyadmin.html.twig</argument>
         </argument>
         <argument key="data_collector.config" type="collection">
           <argument>config</argument>
@@ -3330,6 +3633,9 @@
       </argument>
       <argument>UserBundle\Entity\User</argument>
     </service>
+    <service id="vich_uploader.storage" class="Vich\UploaderBundle\Storage\FileSystemStorage">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+    </service>
     <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
       <argument type="service" id="templating.locator"/>
@@ -3378,6 +3684,14 @@
       <call method="addPath">
         <argument>/home/vincent/plateform/src/StockBundle/Resources/views</argument>
         <argument>Stock</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/vincent/plateform/vendor/vich/uploader-bundle/Resources/views</argument>
+        <argument>VichUploader</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/vincent/plateform/vendor/javiereguiluz/easyadmin-bundle/Resources/views</argument>
+        <argument>EasyAdmin</argument>
       </call>
       <call method="addPath">
         <argument>/home/vincent/plateform/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>

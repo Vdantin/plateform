@@ -10,3 +10,7 @@ parameters:
     mailer_user: steex44@gmail.com
     mailer_password: null
     secret: e04f0274cc113f91eb85ab56e2a27ae5bccd3aa0
+    
+#vich image path parameter
+    app.path.product_images: /uploads/images/products
+
